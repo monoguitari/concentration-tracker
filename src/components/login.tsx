@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
+// import { cn } from "@/lib/utils"
 // @ts-ignore
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
@@ -34,7 +34,9 @@ import { Label } from "@/components/ui/label"
 import { useState } from "react"
 // @ts-ignore
 import { auth, googleProvider } from '../config/firebase'
-import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth"
+import { 
+  // createUserWithEmailAndPassword,
+   signInWithPopup, signInWithEmailAndPassword } from "firebase/auth"
 
 
 export function DrawerDialogDemo() {
