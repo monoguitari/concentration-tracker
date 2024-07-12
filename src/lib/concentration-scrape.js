@@ -60,15 +60,47 @@ const main = async () => {
         const pageContent = document.querySelector('.page_content');
         let titles = pageContent.querySelectorAll('[data-sisprogram]');
         let nextEl = Array.from(titles).map((e) => listify(e.nextElementSibling));
-        let courses = [];
+        let tables = [];
 
         //create titles array and get course selection from next element
         let titles_arr = [...titles];
         titles_arr.forEach((el) => {
-            courses.push(el.nextElementSibling.textContent);
+            tables.push(el.nextElementSibling);
+        })
+        let sections = tables[0].querySelectorAll('tbody tr');
+        let cols = []
+        // if (sections.hasChildNodes()) {
+        //     cols.push('CLASS');
+        // }
+        sections.forEach((tr) => {
+            // cols.push(section.textContent)
+            //prints hours for section, else it class or subsection
+            let hoursCol = tr.querySelector('.hourscol');
+            let hours = hoursCol ? hoursCol.textContent : null;
+            // let content = tr.querySelector('[colspan="2"]').textContent
+            //print subsection if it exists, course otherwise
+            if (hours) {
+                let comm = tr.querySelector('[colspan="2"]')
+                let test = comm.querySelector('.courselistcomment');
+                if (test) {
+                    //if courselistcomment exists, it is a subsection
+                    cols.push(test.textContent);
+                } else {
+                    //old
+                    //else it is a section
+                    let commText = comm.textContent;
+                    cols.push(commText);
+                }
+            } else {
+                //else it is a course
+                let codecol = tr.querySelector('.codecol') ? tr.querySelector('.codecol').textContent : null;
+                cols.push(codecol);
+            }
+            // cols.push('hi')
         })
         
-        return {degreeTypes: degreeTypes, title: courses};
+        
+        return {degreeTypes: degreeTypes, sections: listify(sections),  cols: cols};
     })
     console.log(allSections);
 

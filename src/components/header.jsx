@@ -15,7 +15,7 @@ import { User, LogOut } from 'lucide-react';
 import { DrawerDialogDemo } from "../components/login";
 import { ModeToggle } from "../components/mode-toggle";
 import { Avatar } from "../components/avatar"
-
+import { Link } from 'react-router-dom'
 
 export function Header() {
     const [user, setUser] = useState(null)
@@ -39,13 +39,16 @@ export function Header() {
     }
     console.log(auth?.currentUser)
     return (
-        <div className="flex justify-between align-center p-20">
+        <div className="flex justify-between items-center p-10">
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Concentration Tracker</h1>
-            <div className="flex">
+            <div className="flex justify-center items-center text-center space-x-4">
+                <Link to="/">Home</Link>
+                <Link to="/profile">Profile</Link>
+            </div>
+            <div className="flex items-center">
                 <ModeToggle />
                 <Avatar />
             </div>
-            
         </div>
     )
 }
